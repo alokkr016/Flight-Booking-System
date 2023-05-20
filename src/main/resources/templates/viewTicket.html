@@ -1,22 +1,101 @@
-<link rel = "StyleSheet" href = "style.css"/>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #1e1e1e;
+		}
 
+		svg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
 
+		#background {
+			fill: #1e1e1e;
+		}
 
-<div class = "mainDiv">
-	<div class = "insideMainDiv">
-		<h1 class = "heading">View Ticket</h1>
-		<div class = "topDownInformation" th:object = ${ticket}>
-			<h4 th:text = "*{'From: ' + flight.source}"></h4>
-			<h4 th:text = "*{'To: ' + flight.destination}"></h4>
-			<h4 th:text = "*{'Fare: $' + flight.fare}"></h4>
-			<h4 th:text = "*{'Passenger Name: ' + passenger.name}"></h4>
-			<h4 th:text = "*{'Departure Time: ' + flight.departureTime}"></h4>
+		#airplane {
+			fill: #fff;
+			animation: airplaneAnimation 5s linear infinite;
+		}
+
+		@keyframes airplaneAnimation {
+			0% { transform: translate(-100px, -100px) rotate(45deg); }
+			50% { transform: translate(400px, 400px) rotate(135deg); }
+			100% { transform: translate(-100px, -100px) rotate(225deg); }
+		}
+
+		.mainDiv {
+			width: 400px;
+			margin: 0 auto;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			margin-top: 50px;
+		}
+
+		.insideMainDiv {
+			text-align: center;
+		}
+
+		.heading {
+			color: #333;
+			margin-bottom: 20px;
+		}
+
+		.topDownInformation h4 {
+			margin: 10px 0;
+			color: #666;
+		}
+
+		.buttonsDiv {
+			margin-top: 20px;
+			text-align: center;
+		}
+
+		button {
+			background-color: #3f8eff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+	<path id="background" d="M0 0 L800 0 L800 600 L0 600 Z" />
+	<path id="airplane" d="M15 8 L40 8 L40 20 L50 20 L50 25 L40 25 L40 55 L35 55 L35 45 L15 45 L15 55 L10 55 L10 25 L0 25 L0 20 L10 20 Z" />
+</svg>
+
+<div class="mainDiv">
+	<div class="insideMainDiv">
+		<h1 class="heading">View Ticket</h1>
+		<div class="topDownInformation" th:object="${ticket}">
+			<h4 th:text="*{'From: ' + flight.source}"></h4>
+			<h4 th:text="*{'To: ' + flight.destination}"></h4>
+			<h4 th:text="*{'Fare: $' + flight.fare}"></h4>
+			<h4 th:text="*{'Passenger Name: ' + passenger.name}"></h4>
+			<h4 th:text="*{'Departure Time: ' + flight.departureTime}"></h4>
+
 		</div>
-		<div class = "buttonsDiv">
-				<button><a href = "home">Book Next Flight</a></button>
-				<button><a href = "passengerProfile">Your Profile</a></button>
-				<button><a th:href="*{'cancelTicket?id=' + ticket.id}">Cancel Ticket</a></button>
-				<button><a th:href = "*{'changeFlight?id=' + ticket.id}">Change Flight</a></button>
+		<div class="buttonsDiv">
+			<button><a href="home">Book Next Flight</a></button>
+			<button><a href="passengerProfile">Your Profile</a></button>
+			<button th:href="*{'cancelTicket?id=' + ticket.id}">Cancel Ticket</button>
+			<button th:href="*{'changeFlight?id=' + ticket.id}">Change Flight</button>
 		</div>
 	</div>
 </div>

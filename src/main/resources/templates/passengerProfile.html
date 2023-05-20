@@ -1,32 +1,142 @@
-<link rel = "Stylesheet" href = "style.css"/>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #1e1e1e;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			font-family: Arial, sans-serif;
+		}
 
+		.mainDiv {
+			background-color: #3f8eff;
+			padding: 30px;
+			border-radius: 10px;
+			text-align: center;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		}
 
-<div class = "mainDiv">
-<div class = "insideMainDiv">
-<h1 class = "heading" th:text = ${session.passenger.userName}></h1>
-<div class = "passengerProfile">
-	<div class = "details">
-	<div class = "picture">
-	</div>
-	<div class = "topDownInformation" th:object = ${session.passenger}>
-		<h4 th:text = "*{'Name: ' + name}"></h4>
-		<h4 th:text = "*{'email: ' + email}"></h4>
-		<h4 th:text = "*{'Phone No.: ' + phoneNumber}"></h4>
-		<h4 th:text = "*{'Passport No.: ' + passportNumber}"></h4>
-	</div>
-	</div>
-	<div class = "buttonsDiv">
-		<button style = "margin: 5px;"><a href = "logout">LogOut</a></button>
-		<button style = "margin: 5px;"><a href = "home">Home</a></button>
-		<button><a href = "viewAllTickets">View Tickets</a></button>
-		<button><a th:href = "*{'editPassenger?id=' + session.passenger.id}">Edit Details</a></button>
-		<button><a th:href = "deleteAccountConfirmationPage">Delete Account</a></button>
-		<button><a href="viewNotifications" class="notification">
- 			 <span>New Notifications</span>
- 			 <span class="badge" th:text = "${unreadNotifications}"></span>
-		</a>
-		</button>
+		.heading {
+			font-size: 30px;
+			color: #fff;
+			margin-bottom: 20px;
+		}
+
+		.passengerProfile {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 20px;
+		}
+
+		.picture {
+			width: 150px;
+			height: 150px;
+			margin-bottom: 10px;
+		}
+
+		.picture svg {
+			width: 100%;
+			height: 100%;
+			fill: #ff3860;
+		}
+
+		.username {
+			font-size: 24px;
+			color: #fff;
+			margin-top: 10px;
+		}
+
+		.details {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			margin-bottom: 20px;
+		}
+
+		.topDownInformation h4 {
+			margin: 10px 0;
+			font-size: 16px;
+			color: #fff;
+		}
+
+		.buttonsDiv {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.buttonsDiv button {
+			background-color: #ff3860;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 5px;
+			font-size: 16px;
+			transition: background-color 0.3s ease;
+		}
+
+		.buttonsDiv button:hover {
+			background-color: #1e1e1e;
+		}
+
+		.notification {
+			position: relative;
+		}
+
+		.notification .badge {
+			position: absolute;
+			top: -8px;
+			right: -8px;
+			background-color: #ff3860;
+			color: #fff;
+			padding: 5px 10px;
+			border-radius: 50%;
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+<div class="mainDiv">
+<!--	<h1 class="heading" th:text="${session.passenger.userName}"></h1>-->
+	<div class="passengerProfile">
+		<div class="picture">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+				<path d="M256 0C114.61 0 0 114.61 0 256c0 141.39 114.61 256 256 256 141.39 0 256-114.61 256-256C512 114.61 397.39 0 256 0zm0 32c128.92 0 224 95.08 224 224 0 128.92-95.08 224-224 224C127.08 480 32 384.92 32 256 32 127.08 127.08 32 256 32zm0 48c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 32c55.23 0 100 44.77 100 100s-44.77 100-100 100-100-44.77-100-100 44.77-100 100-100zm0 32c-33.08 0-60 26.92-60 60s26.92 60 60 60 60-26.92 60-60-26.92-60-60-60zm0 32c22.06 0 40 17.94 40 40s-17.94 40-40 40-40-17.94-40-40 17.94-40 40-40zm0 32c11.05 0 20 8.95 20 20s-8.95 20-20 20-20-8.95-20-20 8.95-20 20-20z"/>
+			</svg>
+		</div>
+		<div class="username" th:text="${session.passenger.userName}"></div>
+		<div class="details">
+			<div class="topDownInformation" th:object="${session.passenger}">
+				<h4 th:text="*{'Name: ' + name}"></h4>
+				<h4 th:text="*{'Email: ' + email}"></h4>
+				<h4 th:text="*{'Phone No.: ' + phoneNumber}"></h4>
+				<h4 th:text="*{'Passport No.: ' + passportNumber}"></h4>
+			</div>
+		</div>
+		<div class="buttonsDiv">
+			<button><a href="logout">Log Out</a></button>
+			<button><a href="home">Home</a></button>
+			<button><a href="viewAllTickets">View Tickets</a></button>
+			<button th:href="*{'editPassenger?id=' + session.passenger.id}">Edit Details</button>
+			<button><a href="deleteAccountConfirmationPage">Delete Account</a></button>
+			<button>
+				<a href="viewNotifications" class="notification">
+					<span style="background-color: #ff3860;" >New Notifications</span>
+					<span class="badge" th:text="${unreadNotifications}"></span>
+				</a>
+			</button>
+		</div>
 	</div>
 </div>
-</div>
-</div>
+</body>
+</html>

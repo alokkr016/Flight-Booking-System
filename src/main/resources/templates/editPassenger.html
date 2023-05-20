@@ -1,27 +1,93 @@
-<link rel = "StyleSheet" href ="style.css"/>
+<!DOCTYPE html>
+<html>
+<head>
+<!--	<link rel="stylesheet" href="style.css">-->
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #1e1e1e;
+			color: #fff;
+		}
 
-<div class = "mainDiv">
-	<div class = "insideMainDiv">
-		<h1 class = "heading">Edit your details</h1>
-		<form class = "topDownForm" method = "post" action = "editToUpdatePassenger" th:object = "${passenger}">
-		<h4 class = "directions">Please enter your changed details as per the label</h4>
-			<input th:field = "*{id}" hidden>
-			<label for = "name">Name</label>
-			<input required th:field = "*{name}"/>
-			<label for = "email">Email</label>
-			<input required th:field = "*{email}"/>
-			<label required for = "phoneNumber">Phone Number</label>
-			<input th:field = "*{phoneNumber}"/>
-			<label required for = "passportNumber">Passport Number</label>
-			<input th:field = "*{passportNumber}"/>
-			<label for = "userName">Username</label>
-			<input required th:field = "*{userName}"/>
-			<label for = "password">Password</label>
-			<input required type = "password" th:field = "*{password}"/>
-			<input class = "submitButton" type="submit">
+		h1 {
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 20px;
+		}
+
+		label {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"] {
+			font-size: 16px;
+			padding: 5px;
+			margin-bottom: 10px;
+			width: 300px;
+		}
+
+		.submitButton {
+			background-color: #3f8eff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			width: 150px;
+		}
+
+		.buttonsDiv {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.buttonsDiv button {
+			background-color: #3f8eff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+<div class="mainDiv">
+	<div class="insideMainDiv">
+		<h1 class="heading">Edit your details</h1>
+		<form class="topDownForm" method="post" action="editToUpdatePassenger" th:object="${passenger}">
+			<h4 class="directions">Please enter your changed details as per the label</h4>
+			<input th:field="*{id}" hidden>
+			<label for="name">Name</label>
+			<input required th:field="*{name}" />
+			<label for="email">Email</label>
+			<input required th:field="*{email}" />
+			<label for="phoneNumber">Phone Number</label>
+			<input required th:field="*{phoneNumber}" />
+			<label for="passportNumber">Passport Number</label>
+			<input required th:field="*{passportNumber}" />
+			<label for="userName">Username</label>
+			<input required th:field="*{userName}" />
+			<label for="password">Password</label>
+			<input required type="password" th:field="*{password}" />
+			<input class="submitButton" type="submit" value="Update">
 		</form>
-		<div class = "buttonsDiv">
-		<button><a th:href = "home">Go Home</a></button>
+		<div class="buttonsDiv">
+			<button><a href="home">Go Home</a></button>
 		</div>
 	</div>
 </div>
+</body>
+</html>

@@ -1,27 +1,142 @@
-<link rel = "StyleSheet" href = "style.css"/>
+<!DOCTYPE html>
+<html>
+<head>
+<!--	<link rel="stylesheet" href="style.css">-->
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #1e1e1e;
+		}
 
-<h1 class = "heading">Flights</h1>
+		svg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
 
+		#background {
+			fill: #1e1e1e;
+		}
 
+		#airplane {
+			fill: #fff;
+			animation: airplaneAnimation 5s linear infinite;
+		}
 
-<div class = "allFlights" th:each="flight : ${flights}" th:object = "${flight}">
-	<div class ="oneFlight">
-		<div class = "time">
-			<h2 th:text = "*{source}"></h2>
-			<p th:text = "*{departureTime}"></p>
+		@keyframes airplaneAnimation {
+			0% { transform: translate(-100px, -100px) rotate(45deg); }
+			50% { transform: translate(400px, 400px) rotate(135deg); }
+			100% { transform: translate(-100px, -100px) rotate(225deg); }
+		}
+
+		.heading {
+			color: #fff;
+			text-align: center;
+			font-size: 28px;
+			margin: 20px 0;
+		}
+
+		.allFlights {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.oneFlight {
+			background-color: #fff;
+			width: 300px;
+			border-radius: 10px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			margin: 10px;
+			text-align: center;
+			position: relative;
+		}
+
+		.time {
+			margin-bottom: 20px;
+		}
+
+		.time h2 {
+			font-size: 24px;
+			color: #333;
+		}
+
+		.time p {
+			font-size: 14px;
+			color: #666;
+		}
+
+		.oneFlight h2 {
+			font-size: 20px;
+			color: #333;
+			margin: 10px 0;
+		}
+
+		.oneFlight button {
+			background-color: #3f8eff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.buttonsDiv {
+			margin-top: 20px;
+			text-align: center;
+		}
+
+		.buttonsDiv button {
+			background-color: #3f8eff;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 5px;
+		}
+
+		.allFlights {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			overflow-y: scroll;
+			max-height: 400px; /* Adjust the height as needed */
+		}
+	</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+	<path id="background" d="M0 0 L800 0 L800 600 L0 600 Z" />
+	<path id="airplane" d="M15 8 L40 8 L40 20 L50 20 L50 25 L40 25 L40 55 L35 55 L35 45 L15 45 L15 55 L10 55 L10 25 L0 25 L0 20 L10 20 Z" />
+
+</svg>
+<h1 class="heading">Flights</h1>
+<div class="allFlights" th:each="flight : ${flights}" th:object="${flight}">
+	<div class="oneFlight">
+		<div class="time">
+			<h2 th:text="*{source}"></h2>
+			<p th:text="*{departureTime}"></p>
 		</div>
 		<h2>-------></h2>
-		<div class = "time">
-			<h2 th:text = "*{destination}"></h2>
-			<p th:text = "*{arrivalInDestinationTime}"></p>
+		<div class="time">
+			<h2 th:text="*{destination}"></h2>
+			<p th:text="*{arrivalInDestinationTime}"></p>
 		</div>
-		<h2 th:text = "*{'$' + fare}"></h2>
-		<h2 th:text = "*{plane.model}"></h2>
+		<h2 th:text="*{'$' + fare}"></h2>
+		<h2 th:text="*{plane.model}"></h2>
 		<div>
-			<button style = "margin: 5px;"><a  th:href="*{'chooseSeat?id=' + id}">Book</a></button>
+			<button style="margin: 5px;"><a th:href="*{'chooseSeat?id=' + id}">Book</a></button>
 		</div>
 	</div>
 </div>
-<div class = "buttonsDiv">
-<button><a th:href = "home">Go Back</a></button>
+<div class="buttonsDiv">
+	<button><a th:href="home">Go Back</a></button>
 </div>
+</body>
+</html>

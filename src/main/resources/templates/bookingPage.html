@@ -1,28 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #fff;
+        }
 
-<link rel = "stylesheet" href =".style.css"/>
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
 
-<h1 style = "background-color : red;" th:if = "'isEqual' == ${isEqual}">Please Select different places</h1>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
 
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #3f8eff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .buttonsDiv {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .buttonsDiv button {
+            background-color: #3f8eff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .error {
+            background-color: red;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
 <h1>Booking Page</h1>
 
-<form action = "flightDetails">
-<label for = "source-place">From</label>
-<select name = "source-place" id = "source-place">
-<option value = "Sydney">Sydney</option>
-<option value = "Melbourne">Melbourne</option>
-<option value = "Adelaide">Adelaide</option>
-<option value = "Perth">Perth</option>
-</select>
+<h1 class="error" th:if="'isEqual' == ${isEqual}">Please select different places</h1>
 
+<form action="flightDetails">
+    <label for="source-place">From</label>
+    <select name="source-place" id="source-place">
+        <option value="Sydney">Sydney</option>
+        <option value="Melbourne">Melbourne</option>
+        <option value="Adelaide">Adelaide</option>
+        <option value="Perth">Perth</option>
+    </select>
 
-<label for = "destination-place">To</label>
-<select name = "destination-place" id = "destination-place">
-<option value = "Sydney">Sydney</option>
-<option value = "Melbourne">Melbourne</option>
-<option value = "Adelaide">Adelaide</option>
-<option value = "Perth" selected>Perth</option>
-</select>
-<input type = "submit"/>
+    <label for="destination-place">To</label>
+    <select name="destination-place" id="destination-place">
+        <option value="Sydney">Sydney</option>
+        <option value="Melbourne">Melbourne</option>
+        <option value="Adelaide">Adelaide</option>
+        <option value="Perth" selected>Perth</option>
+    </select>
+    <input type="submit" value="Submit" />
 </form>
-<button><a href = "home">Go Home</a></button>
-<button><a href = "login">Login</a></button>
+
+<div class="buttonsDiv">
+    <button><a href="home">Go Home</a></button>
+    <button><a href="login">Login</a></button>
+</div>
+</body>
+</html>
