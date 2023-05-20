@@ -1,142 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<!--	<link rel="stylesheet" href="style.css">-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flight Booking System</title>
 	<style>
+		/* Custom CSS styles */
 		body {
+			font-family: Arial, sans-serif;
+			background-color: #f8f8f8;
 			margin: 0;
 			padding: 0;
-			background-color: #1e1e1e;
-		}
-
-		svg {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			z-index: -1;
-		}
-
-		#background {
-			fill: #1e1e1e;
-		}
-
-		#airplane {
-			fill: #fff;
-			animation: airplaneAnimation 5s linear infinite;
-		}
-
-		@keyframes airplaneAnimation {
-			0% { transform: translate(-100px, -100px) rotate(45deg); }
-			50% { transform: translate(400px, 400px) rotate(135deg); }
-			100% { transform: translate(-100px, -100px) rotate(225deg); }
 		}
 
 		.heading {
-			color: #fff;
+			font-size: 32px;
+			color: #007bff;
+			margin-bottom: 20px;
 			text-align: center;
-			font-size: 28px;
-			margin: 20px 0;
 		}
 
 		.allFlights {
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: center;
+			justify-content: space-evenly;
 		}
 
 		.oneFlight {
 			background-color: #fff;
-			width: 300px;
-			border-radius: 10px;
+			border-radius: 8px;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			padding: 20px;
 			margin: 10px;
 			text-align: center;
+			transition: transform 0.3s;
+			width: 300px;
+			cursor: pointer;
 			position: relative;
+			overflow: hidden;
+		}
+
+		.oneFlight::before {
+			content: "";
+			background-color: rgba(0, 0, 0, 0.2);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+
+		.oneFlight:hover {
+			transform: scale(1.05);
+		}
+
+		.oneFlight:hover::before {
+			opacity: 1;
 		}
 
 		.time {
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 
 		.time h2 {
 			font-size: 24px;
-			color: #333;
+			margin-bottom: 5px;
+			color: #007bff;
 		}
 
 		.time p {
 			font-size: 14px;
-			color: #666;
+			color: #777;
+		}
+
+		.flightIcon {
+			width: 50px;
+			margin-bottom: 10px;
 		}
 
 		.oneFlight h2 {
-			font-size: 20px;
-			color: #333;
-			margin: 10px 0;
-		}
-
-		.oneFlight button {
-			background-color: #3f8eff;
-			color: #fff;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 5px;
-			cursor: pointer;
+			font-size: 24px;
+			margin-bottom: 10px;
+			color: #555;
 		}
 
 		.buttonsDiv {
 			margin-top: 20px;
-			text-align: center;
+			display: flex;
+			justify-content: center;
 		}
 
 		.buttonsDiv button {
-			background-color: #3f8eff;
+			background-color: #007bff;
 			color: #fff;
 			border: none;
+			border-radius: 4px;
 			padding: 10px 20px;
-			border-radius: 5px;
-			cursor: pointer;
 			margin: 5px;
+			font-size: 14px;
+			cursor: pointer;
+			transition: background-color 0.3s;
 		}
 
-		.allFlights {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			overflow-y: scroll;
-			max-height: 400px; /* Adjust the height as needed */
+		.buttonsDiv button:hover {
+			background-color: #0056b3;
+		}
+
+		.buttonsDiv a {
+			color: #fff;
+			text-decoration: none;
 		}
 	</style>
 </head>
-<body>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-	<path id="background" d="M0 0 L800 0 L800 600 L0 600 Z" />
-	<path id="airplane" d="M15 8 L40 8 L40 20 L50 20 L50 25 L40 25 L40 55 L35 55 L35 45 L15 45 L15 55 L10 55 L10 25 L0 25 L0 20 L10 20 Z" />
 
-</svg>
+<body>
 <h1 class="heading">Flights</h1>
 <div class="allFlights" th:each="flight : ${flights}" th:object="${flight}">
-	<div class="oneFlight">
-		<div class="time">
-			<h2 th:text="*{source}"></h2>
-			<p th:text="*{departureTime}"></p>
+	<a th:href="*{'chooseSeat?id=' + id}">
+		<div class="oneFlight">
+			<div class="time">
+				<h2 th:text="*{source}"></h2>
+				<p th:text="*{departureTime}"></p>
+			</div>
+			<div class="time">
+				<h2 th:text="*{destination}"></h2>
+				<p th:text="*{arrivalInDestinationTime}"></p>
+			</div>
+			<img class="flightIcon" src="flight-icon.svg" alt="Flight Icon">
+			<h2 th:text="'$' + fare"></h2>
+			<h2 th:text="*{plane.model}"></h2>
+			<div>
+				<button>Book Now</button>
+			</div>
 		</div>
-		<h2>-------></h2>
-		<div class="time">
-			<h2 th:text="*{destination}"></h2>
-			<p th:text="*{arrivalInDestinationTime}"></p>
-		</div>
-		<h2 th:text="*{'$' + fare}"></h2>
-		<h2 th:text="*{plane.model}"></h2>
-		<div>
-			<button style="margin: 5px;"><a th:href="*{'chooseSeat?id=' + id}">Book</a></button>
-		</div>
-	</div>
+	</a>
 </div>
 <div class="buttonsDiv">
 	<button><a th:href="home">Go Back</a></button>
 </div>
 </body>
+
 </html>

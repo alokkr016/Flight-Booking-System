@@ -1,23 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flight Booking System</title>
+	<style>
+		/* Custom CSS styles */
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f8f8f8;
+			margin: 0;
+			padding: 0;
+		}
 
+		.mainDiv {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
 
-<link rel = "StyleSheet" href = "style.css"/>
+		.insideMainDiv {
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			text-align: center;
+			width: 400px;
+		}
 
-<div class = "mainDiv">
-	<div class = "insideMainDiv">
-		<h1 class = "heading">Login</h1>
-		<h1 style = "background-color: red;">Please Enter correct username and password</h1>
-		<form class = "topDownForm" method = "post" action = "validateLogin" th:object = "${passenger}">
-		<h4 class = "directions">Please enter your details as per the label</h4>
-			<label for = "name">Username</label>
-			<input th:field = "*{userName}"/>
-			<label for = "userName">Password</label>
-			<input type = "password" th:field = "*{password}"/>
-			<input class = "submitButton" type = "submit"/>
+		.heading {
+			font-size: 32px;
+			color: #007bff;
+			margin-bottom: 20px;
+		}
+
+		.failedMessage {
+			font-size: 16px;
+			color: #ff0000;
+			margin-bottom: 20px;
+		}
+
+		.topDownForm {
+			margin-bottom: 20px;
+		}
+
+		.directions {
+			font-size: 14px;
+			margin-bottom: 10px;
+			color: #555;
+		}
+
+		label {
+			font-size: 16px;
+			margin-bottom: 5px;
+			color: #555;
+			display: block;
+			text-align: left;
+		}
+
+		input {
+			font-size: 16px;
+			padding: 8px 12px;
+			border-radius: 4px;
+			border: 1px solid #ccc;
+			width: 100%;
+			margin-bottom: 10px;
+			color: #555;
+		}
+
+		.submitButton {
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			padding: 10px 20px;
+			margin-top: 10px;
+			font-size: 14px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.submitButton:hover {
+			background-color: #0056b3;
+		}
+
+		.buttonsDiv {
+			display: flex;
+			justify-content: center;
+		}
+
+		.buttonsDiv button {
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			padding: 10px 20px;
+			margin: 5px;
+			font-size: 14px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.buttonsDiv button:hover {
+			background-color: #0056b3;
+		}
+
+		.buttonsDiv a {
+			color: #fff;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+<div class="mainDiv">
+	<div class="insideMainDiv">
+		<h1 class="heading">Login</h1>
+		<h1 class="failedMessage">Please enter correct username and password</h1>
+		<form class="topDownForm" method="post" action="validateLogin" th:object="${passenger}">
+			<h4 class="directions">Please enter your details as per the label</h4>
+			<label for="name">Username</label>
+			<input th:field="*{userName}" />
+			<label for="userName">Password</label>
+			<input type="password" th:field="*{password}" />
+			<input class="submitButton" type="submit" value="Log In">
 		</form>
-		<div class = "buttonsDiv">
-			<button><a href = "home">Home</a></button>
-			<button><a href = "registerPassenger">Don't have an account?</a></button>
+		<div class="buttonsDiv">
+			<button><a href="home">Home</a></button>
+			<button><a href="registerPassenger">Don't have an account?</a></button>
 		</div>
 	</div>
 </div>
+</body>
+
+</html>

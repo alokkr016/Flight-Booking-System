@@ -1,72 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<!--	<link rel="stylesheet" href="style.css">-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flight Booking System</title>
 	<style>
+		/* Custom CSS styles */
 		body {
+			font-family: Arial, sans-serif;
+			background-color: #f8f8f8;
 			margin: 0;
 			padding: 0;
-			background-color: #1e1e1e;
-			color: #fff;
 		}
 
-		h1 {
+		.heading {
+			font-size: 32px;
+			color:  #007bff;
+			margin-bottom: 20px;
 			text-align: center;
-			margin: 20px 0;
 		}
 
-		form {
+		.topDownForm {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			margin: 20px;
 		}
 
-		label {
+		.directions {
 			font-size: 18px;
+			color: #666;
 			margin-bottom: 10px;
+			text-align: center;
 		}
 
-		input[type="text"],
-		input[type="email"],
-		input[type="password"] {
+		.topDownForm label {
 			font-size: 16px;
-			padding: 5px;
-			margin-bottom: 10px;
+			color: #333;
+			margin-bottom: 5px;
+		}
+
+		.topDownForm input[type="text"],
+		.topDownForm input[type="password"] {
+			padding: 10px;
+			border: none;
+			border-bottom: 2px solid  #007bff;
+			background-color: transparent;
 			width: 300px;
+			margin-bottom: 15px;
+			font-size: 14px;
+			color: #333;
+			transition: border-bottom-color 0.3s ease;
+		}
+
+		.topDownForm input[type="text"]:focus,
+		.topDownForm input[type="password"]:focus {
+			border-bottom-color:  #0056b3;
+			outline: none;
 		}
 
 		.submitButton {
-			background-color: #3f8eff;
+			background-color:  #007bff;
 			color: #fff;
 			border: none;
+			border-radius: 4px;
 			padding: 10px 20px;
-			border-radius: 5px;
+			margin-top: 20px;
+			font-size: 14px;
 			cursor: pointer;
-			font-size: 16px;
-			width: 150px;
+			transition: background-color 0.3s ease;
+		}
+
+		.submitButton:hover {
+			background-color:  #0056b3;
 		}
 
 		.buttonsDiv {
-			text-align: center;
 			margin-top: 20px;
+			display: flex;
+			justify-content: center;
 		}
 
 		.buttonsDiv button {
-			background-color: #3f8eff;
+			background-color:  #007bff;
 			color: #fff;
 			border: none;
+			border-radius: 4px;
 			padding: 10px 20px;
-			border-radius: 5px;
-			cursor: pointer;
 			margin: 5px;
+			font-size: 14px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		.buttonsDiv button:hover {
+			background-color:  #0056b3;
 		}
 	</style>
 </head>
+
 <body>
 <div class="mainDiv">
 	<div class="insideMainDiv">
 		<h1 class="heading">Edit your details</h1>
+
 		<form class="topDownForm" method="post" action="editToUpdatePassenger" th:object="${passenger}">
 			<h4 class="directions">Please enter your changed details as per the label</h4>
 			<input th:field="*{id}" hidden>
@@ -85,9 +122,10 @@
 			<input class="submitButton" type="submit" value="Update">
 		</form>
 		<div class="buttonsDiv">
-			<button><a href="home">Go Home</a></button>
+			<button><a th:href="home">Go Home</a></button>
 		</div>
 	</div>
 </div>
 </body>
+
 </html>
